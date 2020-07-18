@@ -138,7 +138,7 @@ impl Monitor {
     /// Retrieves a string describing a monitor's capabilities.
     ///
     /// This string is always ASCII and includes a terminating null character.
-    pub fn winapi_capabilities_request_and_capabilities_reply(&self, string: &mut [u8]) -> io::Result<()> {
+    pub fn winapi_capabilities_request_and_capabilities_reply(&self, string: &mut Vec<u8>) -> io::Result<()> {
         unsafe {
             if CapabilitiesRequestAndCapabilitiesReply(self.handle(), string.as_mut_ptr() as *mut _, string.len() as _) != TRUE {
                 Err(io::Error::last_os_error())
